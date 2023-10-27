@@ -1,0 +1,86 @@
+#publishContainer {
+  padding: 10px;
+  /* border: 1px solid red; */
+}
+
+#publishContainer header {
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #000;
+}
+
+#publishContainer header h1 {
+  margin: 20px 0;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.formContainer div {
+  display: flex;
+  flex-direction: column;
+  max-width: 650px;
+  width: 100%;
+  margin: 10px auto;
+}
+
+.formContainer div label {
+  font-size: 1.3em;
+  margin: 10px 0;
+}
+
+.addImage .previewImage {
+  align-self: center;
+  max-width: 650px;
+  width: 100%;
+  margin: 10px 0;
+  /* border: 1px solid #000; */
+}
+
+.addImage input {
+  background-color: #aaa;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.addDescription textarea {
+  width: 100%;
+  resize: vertical;
+  font-size: 1.4em;
+  height: 250px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.addLocalization input {
+  padding: 10px;
+  font-size: 1.2em;
+  border-radius: 10px;
+}
+
+.btnSubmit {
+  cursor: pointer;
+  background-color: #0084ff;
+  color: #fff;
+  padding: 20px;
+  width: 250px;
+  font-size: 1.3em;
+  border: 1px solid transparent;
+  transition: .4s;
+  margin: 30px auto;
+}
+
+.btnSubmit:hover {
+  background-color: transparent;
+  border-color: #0084ff;
+  color: #0084ff;
+  border-radius: 10px;
+}
+
+@media (max-width: 650px) {
+  .btnSubmit {
+    width: 100%;
+  }
+}

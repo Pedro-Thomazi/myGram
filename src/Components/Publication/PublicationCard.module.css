@@ -1,0 +1,162 @@
+.publications {
+  /* border: 1px solid #000; */
+  max-width: 600px;
+  width: 100%;
+  margin: 30px auto;
+  padding: 10px 0;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.445);
+  /* height: 650px; */
+}
+
+.headerPublication {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 20px;
+}
+
+.headerPublication .user {
+  display: flex;
+  align-items: center;
+}
+
+.headerPublication .user .nameUser {
+  margin-bottom: 0;
+  font-size: 1.2em;
+  color: #000;
+}
+
+.headerPublication .user .photoUser {
+  display: block;
+  width: 60px;
+  height: 60px;
+  /* border: 1px solid #000; */
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.headerPublication .config {
+  position: relative;
+}
+
+.headerPublication .config button {
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.headerPublication .config button svg {
+  font-size: 2.2em;
+}
+
+.headerPublication .config .menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  width: 200px;
+  padding: 10px;
+  background-color: #1f1f1f;
+  margin-right: 10px;
+  z-index: 2;
+}
+
+.headerPublication .config .menu button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  color: #fff;
+}
+
+.headerPublication .config .menu button span {
+  margin-left: 10px;
+}
+
+.headerPublication .config .menu .btnDel {
+  color: #fff;
+}
+
+.headerPublication .config .menu#show {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.headerPublication .config .menu div {
+  width: 100%;
+  padding: 10px;
+  transition: .4s;
+}
+
+.headerPublication .config .menu div:hover {
+  background-color: #3f3f3f;
+}
+
+.image {
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  width: 100%;
+  margin: 10px 0;
+  height: 550px;
+  cursor: pointer;
+}
+
+.displayPubli {
+  margin: 0 10px;
+}
+
+.likeAndcomment button {
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+}
+/* 
+.likeAndcomment button.message {
+  margin-left: 10px;
+} */
+
+.likeAndcomment button svg {
+  font-size: 2.2em;
+}
+
+.time, 
+.qtdLiks {
+  margin: 5px 0;
+}
+
+.qtdLiks,
+.time,
+.description p span {
+  font-weight: 500;
+}
+
+.description p {
+  word-wrap: break-word;
+}
+
+.localization {
+  word-wrap: break-word;
+}
+
+
+/* Comments */
+.comments {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: #00000065;
+  pointer-events: none;
+}
+
+.comments#showComments {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.btnClose {
+  top: 100px;
+  position: absolute;
+  color: red;
+  transition: .4s;
+}

@@ -1,0 +1,76 @@
+.commentsContainer {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  width: 100%;
+  background-color: #222;
+  color: #fff;
+  margin: 200px auto;
+  padding: 20px;
+}
+
+.commentsContainer form {
+  display: flex;
+  flex-direction: column;
+  margin: 40px;
+}
+
+.commentsContainer form textarea {
+  padding: 10px;
+  height: 200px;
+  background-color: transparent;
+  color: #fff;
+}
+
+.commentsContainer form button {
+  align-self: center;
+  margin-top: 30px;
+  width: 400px;
+  background-color: #0084ff;
+  border: 1px solid transparent;
+}
+
+.commentsContainer form button:hover {
+  border-color: #0084ff;
+}
+
+
+/* Comments */
+.comments {
+  padding: 5px;
+}
+
+.comments img {
+  display: block;
+  width: 70px;
+  height: 70px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+
+.comment {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.content {
+  width: 90%;
+}
+
+.nameAndDate {
+  display: flex;
+}
+
+.nameAndDate .nameComment {
+  margin-right: 20px;
+  font-weight: 600;
+}
+
+.nameAndDate p {
+  color: #888;
+}
+
+.textComment {
+  word-wrap: break-word;
+}

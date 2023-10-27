@@ -1,0 +1,37 @@
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.myBtn {
+  cursor: pointer;
+  background-color: #0084ff;
+  color: #fff;
+  border: 1px solid transparent;
+  padding: 5px 50px;
+  font-size: 1.3em;
+}
+
+.myBtn:hover {
+  background-color: transparent;
+  color: #0084ff;
+  border-color: #0084ff;
+}
+
+.epecial-color {
+  color: #ffffff;
+  border-bottom: 1px solid transparent;
+  transition: .4s;
+}
+
+.epecial-color:hover {
+  color: black;
+  border-color: black;
+}
+
+/* body {
+  padding-bottom: 500px;
+} */

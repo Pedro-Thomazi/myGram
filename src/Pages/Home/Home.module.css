@@ -1,0 +1,61 @@
+.homeContainer {
+  /* border: 1px solid red; */
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 5px 0;
+  background-color: #eee;
+}
+
+.publicCard {
+  margin: 20px auto;
+}
+
+.userPhoto {
+  display: flex;
+  align-items: center;
+  /* border: 1px solid red; */
+}
+
+.allUsers {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* border: 1px solid red; */
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user p {
+  color: #000;
+}
+
+.userPhoto a {
+  position: relative;
+}
+
+.userPhoto img {
+  border-radius: 50%;
+  margin: 10px;
+  width: 90px;
+  height: 90px;
+}
+
+.userPhoto svg {
+  position: absolute;
+  bottom: 55px;
+  right: 15px;
+}
+
+.notPubli {
+  border-top: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
