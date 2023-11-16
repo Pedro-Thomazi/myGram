@@ -19,10 +19,25 @@ import { db } from '../../services/firebaseConnect'
 
 const Dashboard = () => {
   const [myPublications, setMyPublications] = useState([])
+  const [users, setUsers] = useState([])
   const { user } = UserAuth()
   // console.log(user.uid)
 
   useEffect(() => {
+    // Users
+    const qUsers = query(collection(db, 'users'))
+    const unsubscribeUsers = onSnapshot(qUsers, (querySnapshot) => {
+      let usersArr = []
+      // Passou por cada objeto
+      querySnapshot.forEach((doc) => {
+        // Add em um Array cada objeto
+        usersArr.push({ ...doc.data(), id: doc.id })
+      })
+      // Jogou tudo que emcontrou em uma variável
+      setUsers(usersArr)
+    })
+
+
     const q = query(collection(db, 'publications'), orderBy('date', 'desc'))
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let publicationsArr = []
@@ -34,8 +49,13 @@ const Dashboard = () => {
       })
       setMyPublications(publicationsArr)
     })
-    return () => unsubscribe()
+    return () => {
+      unsubscribeUsers()
+      unsubscribe()
+    }
   }, [])
+
+  console.log(users)
 
   const createUserInDb = async () => {
     await addDoc(collection(db, 'users'), {

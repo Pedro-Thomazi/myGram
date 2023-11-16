@@ -51,6 +51,7 @@
   height: 100vh;
   transform: translateX(100%);
   transition: .4s;
+  overflow-y: scroll;
 }
 
 .menuNav.show .contextMenu {
@@ -100,4 +101,45 @@
 
 .contextMenu .btnOptions#btnExit:hover {
   background-color: #c02121;
+}
+
+
+/* Btn add user in DB */
+#containerAddUser {
+  position: relative;
+}
+
+#containerAddUser:hover {
+  background-color: transparent;
+}
+
+.btnAddUserDb {
+  width: 100%;
+  padding: 9px;
+  border: 0;
+  font-size: 1.3em;
+  background-color: #12819c;
+  color: #fff;
+  transition: .4s;
+}
+
+.btnAddUserDb:hover {
+  transform: scale(1.1);
+}
+
+#containerAddUser .parag {
+  opacity: 0;
+  pointer-events: none;
+  background-color: #888;
+  color: #fff;
+  padding: 10px;
+  width: 200px;
+  width: 100%;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: .4s;
+}
+
+#containerAddUser > .btnAddUserDb:hover + .parag {
+  opacity: 1;
 }

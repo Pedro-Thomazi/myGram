@@ -10,12 +10,16 @@ import { AiFillHome } from 'react-icons/ai'
 
 // React
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { UserAuth } from '../../Context/AuthContext'
+import { addDoc, collection, onSnapshot, query } from 'firebase/firestore'
+import { db } from '../../services/firebaseConnect'
 
 const Header = () => {
   const [openMenu, setOpenMenu] = useState('')
+  const [users, setUsers] = useState([])
+
   const { user, logout } = UserAuth()
   const showMenu = () => {
     if (openMenu === '') {
@@ -34,7 +38,35 @@ const Header = () => {
     }
   }
 
-  
+  const createUserInDb = async () => {
+      await addDoc(collection(db, 'users'), {
+        id: user.uid,
+        name: user.displayName,
+        email: user.email,
+        userPhoto: user.photoURL
+      })
+  }
+
+  useEffect(() => {
+    // Users
+    const qUsers = query(collection(db, 'users'))
+    const unsubscribeUsers = onSnapshot(qUsers, (querySnapshot) => {
+      let usersArr = []
+      // Passou por cada objeto
+      querySnapshot.forEach((doc) => {
+        // Add em um Array cada objeto
+        usersArr.push({ ...doc.data(), id: doc.id })
+      })
+      // Jogou tudo que emcontrou em uma variável
+      setUsers(usersArr)
+    })
+    return () => {
+      unsubscribeUsers()
+    }
+  }, [])
+
+  console.log(users.includes(user.email))
+
 
 
   return (
@@ -65,6 +97,12 @@ const Header = () => {
               <Link to='/' className={styles.btnOptions}><AiFillHome size={35} />Home</Link>
               <Link to='/publish' className={styles.btnOptions}><FiPlusSquare size={35} />Publicar</Link>
               <button onClick={signOut} className={styles.btnOptions} id={styles.btnExit}><ImExit size={35} />Sair</button>
+              {users.includes(user.email) && (
+                <div className={styles.btnOptions} id={styles.containerAddUser}>
+                <button className={styles.btnAddUserDb} onClick={createUserInDb}>Add</button>
+                <p className={styles.parag}>Clique aqui para você aparecer para outros usuários, melhorando sua experiência!!!</p>
+              </div>
+              )}
             </div>
           </nav>
         </>
