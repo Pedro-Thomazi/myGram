@@ -35,7 +35,7 @@ const Dashboard = () => {
       setMyPublications(publicationsArr)
     })
     return () => unsubscribe()
-  }, [myPublications])
+  }, [])
 
   const createUserInDb = async () => {
     await addDoc(collection(db, 'users'), {

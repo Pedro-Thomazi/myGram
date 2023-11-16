@@ -13,6 +13,7 @@ import { UserAuth } from '../../Context/AuthContext'
 import userPhoto from '../../Images/foto-usuario.webp'
 // React
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 // Firebase
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from '../../services/firebaseConnect'
@@ -20,28 +21,50 @@ import { db } from '../../services/firebaseConnect'
 
 const PageUser = () => {
   const [userPublications, setUserPublications] = useState([])
-  const { user } = UserAuth()
+  const [user, setUser] = useState([])
+
+  const { id } = useParams()
   // console.log(user.uid)
 
   useEffect(() => {
+    // Dados do user
+    const qUser = query(collection(db, 'users'))
+    const unsubscribeUser = onSnapshot(qUser, (queryUser) => {
+      let userConfigs = []
+      queryUser.forEach((doc) => {
+        const data = doc.data();
+        if (data.id && data.id === id) {
+          userConfigs.push({ ...data, id: doc.id });
+        }
+      })
+      setUser(userConfigs)
+    })
+
     const q = query(collection(db, 'publications'), orderBy('date', 'desc'))
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let publicationsArr = []
       querySnapshot.forEach((doc) => {
         const data = doc.data();
-        if (data.idUser && data.idUser === user.uid) {
+        if (data.idUser && data.idUser === id) {
           publicationsArr.push({ ...data, id: doc.id });
         }
       })
       setUserPublications(publicationsArr)
     })
-    return () => unsubscribe()
-  }, [userPublications])
+    return () => {
+      unsubscribeUser()
+      unsubscribe()
+    }
+  }, [])
+
+  console.log(user)
 
   return (
     <main className={styles.mainContainer}>
       <header className={styles.headerDashboard}>
-        <h1>{user.displayName}</h1>
+        {user && user.map((item, id) => (
+          <h1 key={id}>{item.name}</h1>
+        ))}
       </header>
       <article className={styles.user}>
         <div className={styles.photoAndNumber}>
