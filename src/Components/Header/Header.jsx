@@ -38,14 +38,14 @@ const Header = () => {
     }
   }
 
-  const createUserInDb = async () => {
-      await addDoc(collection(db, 'users'), {
-        id: user.uid,
-        name: user.displayName,
-        email: user.email,
-        userPhoto: user.photoURL
-      })
-  }
+  // const createUserInDb = async () => {
+  //   await addDoc(collection(db, 'users'), {
+  //     id: user.uid,
+  //     name: user.displayName,
+  //     email: user.email,
+  //     userPhoto: user.photoURL
+  //   })
+  // }
 
   useEffect(() => {
     // Users
@@ -65,7 +65,8 @@ const Header = () => {
     }
   }, [])
 
-  console.log(users.includes(user.email))
+  console.log(users?.includes(user))
+  console.log(users)
 
 
 
@@ -97,12 +98,14 @@ const Header = () => {
               <Link to='/' className={styles.btnOptions}><AiFillHome size={35} />Home</Link>
               <Link to='/publish' className={styles.btnOptions}><FiPlusSquare size={35} />Publicar</Link>
               <button onClick={signOut} className={styles.btnOptions} id={styles.btnExit}><ImExit size={35} />Sair</button>
-              {users.includes(user.email) && (
-                <div className={styles.btnOptions} id={styles.containerAddUser}>
-                <button className={styles.btnAddUserDb} onClick={createUserInDb}>Add</button>
-                <p className={styles.parag}>Clique aqui para você aparecer para outros usuários, melhorando sua experiência!!!</p>
-              </div>
-              )}
+              {/* {users && users.map((item) => (
+                users.includes(item.email) ? (
+                  <div className={styles.btnOptions} id={styles.containerAddUser}>
+                    <button className={styles.btnAddUserDb} onClick={createUserInDb}>Conectar-se</button>
+                    <p className={styles.parag}>Clique aqui para você aparecer para outros usuários, melhorando sua experiência!!!</p>
+                  </div>)
+                  : (<></>)
+              ))} */}
             </div>
           </nav>
         </>
