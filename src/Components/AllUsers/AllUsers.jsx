@@ -5,6 +5,7 @@ import { db } from '../../services/firebaseConnect'
 import photoNull from '../../Images/foto-usuario.webp'
 
 import styles from './AllUsers.module.css'
+import { Link } from 'react-router-dom'
 
 const AllUsers = () => {
   const [users, setUsers] = useState([])
@@ -16,20 +17,22 @@ const AllUsers = () => {
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let usersArr = []
       querySnapshot.forEach((doc) => {
-        usersArr.push({ ...doc.data(), id: doc.id })
+        usersArr.push({ ...doc.data() })
       })
       setUsers(usersArr)
     })
     return () => unsubscribe()
   }, [])
 
+  console.log(users)
+
   return (
     <div className={styles.container}>{users.map((item) => (
       <div key={item.id} className={styles.user}>
-        {item.photoUser === null ? (
-          <img src={item.photoUser} alt="Foto do usuário" />
+        {item.userPhoto === null ? (
+          <Link to={`/user/${item.id}`}><img src={item.userPhoto} alt="Foto do usuário" /></Link>
         ) : (
-          <img src={photoNull} alt="Foto do usuário" />
+          <Link to={`/user/${item.id}`}><img src={photoNull} alt="Foto do usuário" /></Link>
         )}
         <p>{item.name}</p>
       </div>
