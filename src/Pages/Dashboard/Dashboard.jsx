@@ -31,11 +31,16 @@ const Dashboard = () => {
       // Passou por cada objeto
       querySnapshot.forEach((doc) => {
         // Add em um Array cada objeto
-        usersArr.push({ ...doc.data(), id: doc.id })
+        const data = doc.data();
+        if (data.id && data.id === user.uid) { 
+          usersArr.push({ ...data, id: doc.id })
+        }
       })
       // Jogou tudo que emcontrou em uma variável
       setUsers(usersArr)
     })
+
+    console.log(users)
 
 
     const q = query(collection(db, 'publications'), orderBy('date', 'desc'))
@@ -96,6 +101,11 @@ const Dashboard = () => {
               <p className={styles.string}>Seguindo</p>
             </span>
           </div>
+        </div>
+        <div className={styles.descripion}>
+          {users && users.map((item) => (
+            <p>{item.descriptionUser}</p>
+          ))}
         </div>
       </article>
       <section className={styles.publications}>

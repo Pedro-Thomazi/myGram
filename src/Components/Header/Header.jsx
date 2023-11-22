@@ -7,13 +7,14 @@ import { BiSolidUserCircle } from 'react-icons/bi'
 import { FiPlusSquare } from 'react-icons/fi'
 import { ImExit } from 'react-icons/im'
 import { AiFillHome } from 'react-icons/ai'
+import { FaBookOpen } from 'react-icons/fa'
 
 // React
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
 import { UserAuth } from '../../Context/AuthContext'
-import { addDoc, collection, onSnapshot, query } from 'firebase/firestore'
+import { collection, onSnapshot, query } from 'firebase/firestore'
 import { db } from '../../services/firebaseConnect'
 
 const Header = () => {
@@ -97,6 +98,7 @@ const Header = () => {
               </Link>
               <Link to='/' className={styles.btnOptions}><AiFillHome size={35} />Home</Link>
               <Link to='/publish' className={styles.btnOptions}><FiPlusSquare size={35} />Publicar</Link>
+              <Link to='/details' className={styles.btnOptions}><FaBookOpen size={35} />Adicionar Descrição</Link>
               <button onClick={signOut} className={styles.btnOptions} id={styles.btnExit}><ImExit size={35} />Sair</button>
               {/* {users && users.map((item) => (
                 users.includes(item.email) ? (

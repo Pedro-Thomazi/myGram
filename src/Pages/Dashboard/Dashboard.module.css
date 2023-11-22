@@ -141,4 +141,17 @@
   margin-top: 5px;
 }
 
+.descripion {
+  width: 50%;
+  margin-top: 10px;
+}
 
+.descripion p {
+  font-size: 1.2em;
+}
+
+@media (max-width: 680px) {
+  .descripion {
+    width: 70%;
+  }
+}

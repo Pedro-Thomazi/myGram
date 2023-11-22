@@ -17,6 +17,7 @@ import UpdateUser from './Pages/UpdateUser/UpdateUser';
 import { AuthContextProvider } from './Context/AuthContext';
 import Publish from './Pages/Publish/Publish';
 import PageUser from './Pages/PageUser/PageUser';
+import AddDetailsUser from './Pages/AddDetailsUser/AddDetailsUser';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Routes>
           <Route path='/' element={<ProtectedPages><Home /></ProtectedPages>} />
           <Route path='/dashboard' element={<ProtectedPages><Dashboard /></ProtectedPages>} />
+          <Route path='/details' element={<ProtectedPages><AddDetailsUser /></ProtectedPages>} />
           <Route path='/publish' element={<ProtectedPages><Publish /></ProtectedPages>} />
           <Route path='/login' element={<ProtectedPageLogin><Login /></ProtectedPageLogin>} />
           <Route path='/register' element={<Register />} />
