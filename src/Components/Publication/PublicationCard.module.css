@@ -141,10 +141,11 @@
 /* Comments */
 .comments {
   opacity: 0;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
+  height: 100vh;
   background-color: #00000065;
   pointer-events: none;
 }
