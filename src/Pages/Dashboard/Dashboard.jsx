@@ -40,8 +40,6 @@ const Dashboard = () => {
       setUsers(usersArr)
     })
 
-    console.log(users)
-
 
     const q = query(collection(db, 'publications'), orderBy('date', 'desc'))
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -60,7 +58,6 @@ const Dashboard = () => {
     }
   }, [])
 
-  console.log(users)
 
   const createUserInDb = async () => {
     await addDoc(collection(db, 'users'), {
@@ -74,7 +71,7 @@ const Dashboard = () => {
   return (
     <main className={styles.mainContainer}>
       <header className={styles.headerDashboard}>
-        <h1>{user.displayName}</h1>
+        <h1>@{user.displayName}</h1>
       </header>
       <article className={styles.user}>
         <div className={styles.photoAndNumber}>
@@ -102,6 +99,7 @@ const Dashboard = () => {
             </span>
           </div>
         </div>
+        <h4>{user.displayName}</h4>
         <div className={styles.descripion}>
           {users && users.map((item) => (
             <p>{item.descriptionUser}</p>

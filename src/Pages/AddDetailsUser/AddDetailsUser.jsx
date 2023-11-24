@@ -54,10 +54,6 @@ const AddDetailsUser = () => {
     }
   }, [])
 
-  console.log(idUser)
-
-
-
   return (
     <section className='container' id={styles.publishContainer}>
       <header>

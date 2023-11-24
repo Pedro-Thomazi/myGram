@@ -57,8 +57,6 @@ const PageUser = () => {
     }
   }, [])
 
-  console.log(user)
-
   return (
     <main className={styles.mainContainer}>
       <header className={styles.headerDashboard}>

@@ -109,10 +109,10 @@
   border: 0;
   background-color: transparent;
 }
-/* 
-.likeAndcomment button.message {
-  margin-left: 10px;
-} */
+
+.likeAndcomment button.message svg {
+  margin-right: 5px;
+}
 
 .likeAndcomment button svg {
   font-size: 2.2em;

@@ -106,6 +106,7 @@ const PublicationCard = ({ configsPubli }) => {
               </button>
               <button onClick={openComments} className={styles.message}>
                 <BiMessageRounded />
+                {configsPubli.comments.length}
               </button>
               <div id={showComments} className={styles.comments}>
                 <AddComments idPubliComment={configsPubli.id} comments={configsPubli.comments} />

@@ -148,6 +148,8 @@
 
 .descripion p {
   font-size: 1.2em;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 @media (max-width: 680px) {

@@ -24,8 +24,6 @@ const AllUsers = () => {
     return () => unsubscribe()
   }, [])
 
-  console.log(users)
-
   return (
     <div className={styles.container}>{users.map((item) => (
       <div key={item.id} className={styles.user}>

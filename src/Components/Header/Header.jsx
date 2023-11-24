@@ -66,11 +66,6 @@ const Header = () => {
     }
   }, [])
 
-  console.log(users?.includes(user))
-  console.log(users)
-
-
-
   return (
     <header className='container-fluid' id={styles.navContainer}>
       <Link to='/'>
