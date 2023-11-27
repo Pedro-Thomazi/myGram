@@ -101,8 +101,8 @@ const Dashboard = () => {
         </div>
         <h4>{user.displayName}</h4>
         <div className={styles.descripion}>
-          {users && users.map((item) => (
-            <p>{item.descriptionUser}</p>
+          {users && users.map((item, id) => (
+            <p key={id}>{item.descriptionUser}</p>
           ))}
         </div>
       </article>
