@@ -23,17 +23,18 @@ const AddDetailsUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    try {
-      if (gender === 'Famale') {
-        setUserPhoto(`${process.env.URL_FOR_WOMAN_PHOTO}`)
-        console.log(userPhoto)
-      }
-  
-      else if (gender === 'Male') {
-        setUserPhoto(`${process.env.URL_FOR_MAN_PHOTO}`)
-        console.log(userPhoto)
-      }
+    if (gender === 'Famale') {
+      setUserPhoto('https://firebasestorage.googleapis.com/v0/b/mygram-1f741.appspot.com/o/womanUser.png?alt=media&token=27f28d2d-5d13-474f-acde-57c2ab1640f2')
 
+      console.log(userPhoto)
+    }
+
+    else {
+      setUserPhoto('https://firebasestorage.googleapis.com/v0/b/mygram-1f741.appspot.com/o/manUser.png?alt=media&token=47cd2e82-01fa-4d80-86b8-de1569b77586')
+      console.log(userPhoto)
+    }
+
+    try {
       await updateDoc(doc(db, 'users', idUser), {
         descriptionUser: description,
         gender: gender,
@@ -70,7 +71,7 @@ const AddDetailsUser = () => {
       unsubscribeUsers()
     }
   }, [])
-
+  
   return (
     <section className='container' id={styles.publishContainer}>
       <header>
