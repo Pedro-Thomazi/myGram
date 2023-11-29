@@ -1,11 +1,11 @@
 // React
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 // Styles
 import styles from './AddComments.module.css'
 
 // Firebase
-import { arrayUnion, doc, updateDoc } from 'firebase/firestore'
+import { arrayUnion, collection, doc, onSnapshot, query, updateDoc } from 'firebase/firestore'
 import { db } from '../../services/firebaseConnect'
 import { UserAuth } from '../../Context/AuthContext'
 
@@ -15,8 +15,30 @@ import nullPhotoUser from '../../Images/foto-usuario.webp'
 
 const AddComments = ({ comments, idPubliComment }) => {
   const [text, setText] = useState('')
+  const [userConfig, setUserConfig] = useState([])
 
   const { user } = UserAuth()
+
+  useEffect(() => {
+    // Users
+    const qUsers = query(collection(db, 'users'))
+    const unsubscribeUsers = onSnapshot(qUsers, (querySnapshot) => {
+      let usersArr = []
+      // Passou por cada objeto
+      querySnapshot.forEach((doc) => {
+        // Add em um Array cada objeto
+        const data = doc.data();
+        if (data.id && data.id === user.uid) { 
+          usersArr.push({ ...data, id: doc.id })
+        }
+      })
+      // Jogou tudo que emcontrou em uma variável
+      setUserConfig(usersArr)
+    })
+    return () => {
+      unsubscribeUsers()
+    }
+  }, [])
 
   const handleSubmitCommet = async (e) => {
     e.preventDefault()
@@ -28,7 +50,7 @@ const AddComments = ({ comments, idPubliComment }) => {
       name: user?.displayName,
       comment: text,
       date: new Date().toLocaleString(),
-      photoUser: user?.photoURL
+      photoUser: userConfig[0]?.userPhoto
     };
 
     // Aqui esta atualizando ou criando o campo 'comments'

@@ -59,50 +59,56 @@ const PageUser = () => {
 
   return (
     <main className={styles.mainContainer}>
-      <header className={styles.headerDashboard}>
-        {user && user.map((item, id) => (
-          <h1 key={id}>{item.name}</h1>
-        ))}
-      </header>
-      <article className={styles.user}>
-        <div className={styles.photoAndNumber}>
-          {!user.photoURL ? (
-            <>
-              <img src={userPhoto} className={styles.userImage} alt="Foto de perfil" />
-            </>
-          ) : (
-            <>
-              <img src={user.photoURL} className={styles.userImage} alt="Foto de perfil" />
-            </>
-          )}
-          <div className={styles.number}>
-            <span>
-              <p className={styles.numbers}>{userPublications.length}</p>
-              <p className={styles.string}>Publicações</p>
-            </span>
-            <span>
-              <p className={styles.numbers}>0</p>
-              <p className={styles.string}>Seguidores</p>
-            </span>
-            <span>
-              <p className={styles.numbers}>0</p>
-              <p className={styles.string}>Seguindo</p>
-            </span>
-          </div>
+      {user && user.map((item, id) => (
+        <div key={id}>
+          <header className={styles.headerDashboard}>
+            <h1>{item.name}</h1>
+          </header>
+          <article className={styles.user}>
+            <div className={styles.photoAndNumber}>
+              {!item.userPhoto ? (
+                <>
+                  <img src={userPhoto} className={styles.userImage} alt="Foto de perfil" />
+                </>
+              ) : (
+                <>
+                  <img src={item.userPhoto} className={styles.userImage} alt="Foto de perfil" />
+                </>
+              )}
+              <div className={styles.number}>
+                <span>
+                  <p className={styles.numbers}>{userPublications.length}</p>
+                  <p className={styles.string}>Publicações</p>
+                </span>
+                <span>
+                  <p className={styles.numbers}>0</p>
+                  <p className={styles.string}>Seguidores</p>
+                </span>
+                <span>
+                  <p className={styles.numbers}>0</p>
+                  <p className={styles.string}>Seguindo</p>
+                </span>
+              </div>
+            </div>
+            <h4>{item.name}</h4>
+            <div className={styles.descripion}>
+              <p>{item.descriptionUser}</p>
+            </div>
+          </article>
         </div>
-      </article>
+      ))}
       <section className={styles.publications}>
         {userPublications && (
           userPublications.map((item, index) => (
             <PublicationCard key={index} configsPubli={item} />))
         )}
         {userPublications.length === 0 && (
-           <div className = {styles.notPubli}>
-           <img src={notPhoto} alt="Sem Foto" />
-           <h2>Perfil sem foto</h2>
-         </div>
-        ) }
-    </section>
+          <div className={styles.notPubli}>
+            <img src={notPhoto} alt="Sem Foto" />
+            <h2>Perfil sem foto</h2>
+          </div>
+        )}
+      </section>
 
     </main >
   )

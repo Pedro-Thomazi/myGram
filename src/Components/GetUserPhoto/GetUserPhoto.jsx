@@ -31,10 +31,10 @@ const GetUserPhoto = () => {
 
   return (
     <>
-    {userConfig && userConfig.map((item) => (
+    {userConfig && userConfig.map((item, id) => (
       item.userPhoto !== '' 
-      ? (<img className='userPhoto' src={item.userPhoto} alt="Foto do usuário" />) 
-      : (<img className='userPhoto' src={userPhoto} alt="Foto do usuário" />)
+      ? (<img key={id} className='userPhoto' src={item.userPhoto} alt="Foto do usuário" />) 
+      : (<img key={id} className='userPhoto' src={userPhoto} alt="Foto do usuário" />)
       
     ))}
     </>

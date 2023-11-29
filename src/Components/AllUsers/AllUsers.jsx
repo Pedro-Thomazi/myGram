@@ -27,7 +27,7 @@ const AllUsers = () => {
   return (
     <div className={styles.container}>{users.map((item) => (
       <div key={item.id} className={styles.user}>
-        {item.userPhoto === null ? (
+        {item.userPhoto !== '' ? (
           <Link to={`/user/${item.id}`}><img src={item.userPhoto} alt="Foto do usuário" /></Link>
         ) : (
           <Link to={`/user/${item.id}`}><img src={photoNull} alt="Foto do usuário" /></Link>

@@ -2,6 +2,7 @@ import styles from './Home.module.css'
 
 // Components
 import PublicationCard from '../../Components/Publication/PublicationCard'
+import AllUsers from '../../Components/AllUsers/AllUsers'
 
 // React
 import { useEffect, useState } from 'react'
@@ -19,15 +20,31 @@ import notPhoto from '../../Images/notPhoto.png'
 
 // Icons
 import { BsFillPlusCircleFill } from 'react-icons/bs'
-import AllUsers from '../../Components/AllUsers/AllUsers'
 
 const Home = () => {
   const [publications, setPublications] = useState([])
+  const [userConfig, setUserConfig] = useState([])
 
   const { user } = UserAuth()
 
   // Ler publicações do firebase
   useEffect(() => {
+    // Users
+    const qUsers = query(collection(db, 'users'))
+    const unsubscribeUsers = onSnapshot(qUsers, (querySnapshot) => {
+      let usersArr = []
+      // Passou por cada objeto
+      querySnapshot.forEach((doc) => {
+        // Add em um Array cada objeto
+        const data = doc.data();
+        if (data.id && data.id === user.uid) {
+          usersArr.push({ ...data, id: doc.id })
+        }
+      })
+      // Jogou tudo que emcontrou em uma variável
+      setUserConfig(usersArr)
+    })
+
     const q = query(collection(db, 'publications'), orderBy('date', 'desc'))
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let publicationsArr = []
@@ -36,24 +53,29 @@ const Home = () => {
       })
       setPublications(publicationsArr)
     })
-    return () => unsubscribe()
+    return () => {
+      unsubscribeUsers()
+      unsubscribe()
+    }
   }, [])
 
   return (
     <main className={styles.homeContainer}>
       <div className={styles.userPhoto}>
         <Link to='/publish'>
-          {user.photoURL === null ? (
-            <div className={styles.user}>
-              <img src={userPhotoNull} alt="Foto Do Usuário" />
-              <p>Eu</p>
-            </div>
-          ) : (
-            <div className={styles.user}>
-              <img src={user.photoURL} alt="Foto Do Usuário" />
-              <p>Eu</p>
-            </div>
-          )}
+          {userConfig && userConfig?.map((item, id) => (
+            item?.userPhoto !== '' ? (
+              <div key={id} className={styles.user}>
+                <img src={item?.userPhoto} alt="Foto Do Usuário" />
+                <p>Eu</p>
+              </div>
+            ) : (
+              <div key={id} className={styles.user}>
+                <img src={userPhotoNull} alt="Foto Do Usuário" />
+                <p>Eu</p>
+              </div>
+            )
+          ))}
           <BsFillPlusCircleFill size={25} />
         </Link>
         <div className={styles.allUsers}>
