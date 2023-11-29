@@ -115,7 +115,11 @@ const PublicationCard = ({ configsPubli }) => {
                 <button onClick={openComments} className={styles.btnClose}><BsX size={60} /></button>
               </div>
             </div>
-            <p className={styles.qtdLiks}>{configsPubli.qtdLikes} curtidas</p>
+            {configsPubli.qtdLikes !== 0 ? (
+              <p className={styles.qtdLiks}>{configsPubli.qtdLikes} curtidas</p>
+            ) : (
+              <p className={styles.qtdLiks}></p>
+            )}
             <div className={styles.description}>
               <p><span>{configsPubli.userName} </span>{configsPubli.description ? (
                 configsPubli.description
