@@ -10,12 +10,13 @@ import PublicationCard from '../../Components/Publication/PublicationCard'
 // Context
 import { UserAuth } from '../../Context/AuthContext'
 
-import userPhoto from '../../Images/foto-usuario.webp'
+
 // React
 import { useEffect, useState } from 'react'
 // Firebase
-import { addDoc, collection, onSnapshot, orderBy, query } from 'firebase/firestore'
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from '../../services/firebaseConnect'
+import GetUserPhoto from '../../Components/GetUserPhoto/GetUserPhoto'
 
 const Dashboard = () => {
   const [myPublications, setMyPublications] = useState([])
@@ -58,18 +59,6 @@ const Dashboard = () => {
     }
   }, [])
 
-  console.log(userConfig)
-
-
-  const createUserInDb = async () => {
-    await addDoc(collection(db, 'users'), {
-      id: user.uid,
-      name: user.displayName,
-      email: user.email,
-      userPhoto: user.photoURL
-    })
-  }
-
   return (
     <main className={styles.mainContainer}>
       <header className={styles.headerDashboard}>
@@ -77,15 +66,7 @@ const Dashboard = () => {
       </header>
       <article className={styles.user}>
         <div className={styles.photoAndNumber}>
-          {!user.photoURL ? (
-            <>
-              <img src={userPhoto} className={styles.userImage} alt="Foto de perfil" />
-            </>
-          ) : (
-            <>
-              <img src={user.photoURL} className={styles.userImage} alt="Foto de perfil" />
-            </>
-          )}
+          <GetUserPhoto />
           <div className={styles.number}>
             <span>
               <p className={styles.numbers}>{myPublications.length}</p>

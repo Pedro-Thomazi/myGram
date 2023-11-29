@@ -35,3 +35,10 @@ ul {
 /* body {
   padding-bottom: 500px;
 } */
+
+.userPhoto {
+  display: block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
