@@ -62,6 +62,8 @@ const PublicationCard = ({ configsPubli }) => {
     })
   }
 
+  console.log(configsPubli.userPhoto)
+
 
   return (
     <div className={styles.publicationContainer}>
@@ -69,7 +71,7 @@ const PublicationCard = ({ configsPubli }) => {
         <div className={styles.publications}>
           <header className={styles.headerPublication}>
             <div className={styles.user}>
-              {configsPubli.userPhoto === null ? (
+              {configsPubli.userPhoto === '' || configsPubli.userPhoto === null ? (
                 <img src={autoUserPhoto} className={styles.photoUser} />
               ) : (
                 <img src={configsPubli.userPhoto} className={styles.photoUser} />

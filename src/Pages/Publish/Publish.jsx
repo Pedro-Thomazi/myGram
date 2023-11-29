@@ -5,12 +5,11 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 // Firebase
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc, collection, onSnapshot, query } from 'firebase/firestore'
 import { db, storage } from '../../services/firebaseConnect'
 
 import { UserAuth } from '../../Context/AuthContext'
 
-import fotoInicial from '../../Images/foto-usuario.webp'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 
 const Publish = () => {
@@ -18,6 +17,7 @@ const Publish = () => {
   const [progress, setProgress] = useState(0)
   const [inputDescription, setInputDescription] = useState('')
   const [inputLocalization, setInputLocalization] = useState('')
+  const [userConfig, setUserConfig] = useState([])
 
   const { user } = UserAuth()
 
@@ -58,7 +58,7 @@ const Publish = () => {
         setImageURL(url)
         await addDoc(collection(db, 'publications'), {
           userName: user.displayName,
-          userPhoto: user.photoURL,
+          userPhoto: userConfig[0]?.userPhoto,
           qtdLikes: 0,
           photo: url,
           localization: inputLocalization,
@@ -74,6 +74,27 @@ const Publish = () => {
     setInputLocalization('')
     navigate('/')
   }
+
+  useEffect(() => {
+    // Users
+    const qUsers = query(collection(db, 'users'))
+    const unsubscribeUsers = onSnapshot(qUsers, (querySnapshot) => {
+      let usersArr = []
+      // Passou por cada objeto
+      querySnapshot.forEach((doc) => {
+        // Add em um Array cada objeto
+        const data = doc.data();
+        if (data.id && data.id === user.uid) { 
+          usersArr.push({ ...data, id: doc.id })
+        }
+      })
+      // Jogou tudo que emcontrou em uma variável
+      setUserConfig(usersArr)
+    })
+    return () => {
+      unsubscribeUsers()
+    }
+  }, [])
 
 
   return (
