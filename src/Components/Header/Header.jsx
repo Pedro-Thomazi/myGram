@@ -59,7 +59,7 @@ const Header = () => {
 
   return (
     <header className='container-fluid' id={styles.navContainer}>
-      <Link to='/'>
+      <Link className={styles.linkCenter} to='/'>
         <h1 className={styles.titleMygram}>MyGram</h1>
       </Link>
       {user && (
