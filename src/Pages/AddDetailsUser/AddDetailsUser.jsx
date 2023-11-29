@@ -19,26 +19,25 @@ const AddDetailsUser = () => {
   // console.log(user.uid)
   const navigate = useNavigate()
 
+  const handleImageFamale = (e) => {
+    setGender(e.target.value)
+    setUserPhoto('https://firebasestorage.googleapis.com/v0/b/mygram-1f741.appspot.com/o/womanUser.png?alt=media&token=27f28d2d-5d13-474f-acde-57c2ab1640f2')
+  }
+
+  const handleImageMale = (e) => {
+    setGender(e.target.value)
+    setUserPhoto('https://firebasestorage.googleapis.com/v0/b/mygram-1f741.appspot.com/o/manUser.png?alt=media&token=47cd2e82-01fa-4d80-86b8-de1569b77586')
+  }
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    if (gender === 'Famale') {
-      setUserPhoto('https://firebasestorage.googleapis.com/v0/b/mygram-1f741.appspot.com/o/womanUser.png?alt=media&token=27f28d2d-5d13-474f-acde-57c2ab1640f2')
-
-      console.log(userPhoto)
-    }
-
-    else {
-      setUserPhoto('https://firebasestorage.googleapis.com/v0/b/mygram-1f741.appspot.com/o/manUser.png?alt=media&token=47cd2e82-01fa-4d80-86b8-de1569b77586')
-      console.log(userPhoto)
-    }
 
     try {
       await updateDoc(doc(db, 'users', idUser), {
         descriptionUser: description,
         gender: gender,
-        // userPhoto: userPhoto
+        userPhoto: userPhoto
       })
     } catch (error) {
       console.log(error.message)
@@ -87,12 +86,12 @@ const AddDetailsUser = () => {
           <label>Sexo</label>
           <div className={styles.genders}>
             <div>
-              <input className={styles.genderMan} value='Male' type="radio" name="sexo" id="man" onChange={(e) => setGender(e.target.value)} />
+              <input className={styles.genderMan} value='Male' type="radio" name="sexo" id="man" onChange={handleImageMale} />
               <label htmlFor='man'>Homem</label>
               <img id={styles.imgMan} className={styles.userImg} src={maleImage} alt="Foto de usuário masculino" />
             </div>
             <div>
-              <input className={styles.genderWoman} value='Famale' type="radio" name="sexo" id="woman" onChange={(e) => setGender(e.target.value)} />
+              <input className={styles.genderWoman} value='Famale' type="radio" name="sexo" id="woman" onChange={handleImageFamale} />
               <label htmlFor='woman'>Mulher</label>
               <img id={styles.imgWoman} className={styles.userImg} src={famaleImage} alt="Foto de usuária feminino" />
             </div>

@@ -19,7 +19,7 @@ import { db } from '../../services/firebaseConnect'
 
 const Dashboard = () => {
   const [myPublications, setMyPublications] = useState([])
-  const [users, setUsers] = useState([])
+  const [userConfig, setUserConfig] = useState([])
   const { user } = UserAuth()
   // console.log(user.uid)
 
@@ -37,7 +37,7 @@ const Dashboard = () => {
         }
       })
       // Jogou tudo que emcontrou em uma variável
-      setUsers(usersArr)
+      setUserConfig(usersArr)
     })
 
 
@@ -57,6 +57,8 @@ const Dashboard = () => {
       unsubscribe()
     }
   }, [])
+
+  console.log(userConfig)
 
 
   const createUserInDb = async () => {
@@ -101,7 +103,7 @@ const Dashboard = () => {
         </div>
         <h4>{user.displayName}</h4>
         <div className={styles.descripion}>
-          {users && users.map((item, id) => (
+          {userConfig && userConfig.map((item, id) => (
             <p key={id}>{item.descriptionUser}</p>
           ))}
         </div>
