@@ -95,7 +95,7 @@
 
 .genders div {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
 }
 
@@ -105,14 +105,37 @@
   align-items: center;
   cursor: pointer;
   margin: 0 15px;
+  background-color: #1f1f1f;
+  border: 1px solid transparent;
+  color: #fff;
+  padding: 10px 35px;
+  margin: 10px 0;
+  transition: .4s;
+}
+
+.genders div label:hover {
+  background-color: transparent;
+  border: 1px solid #1f1f1f;
+  color: #1f1f1f;
 }
 
 .genders div input {
   width: 20px;
+  display: none;
 }
 
 .userImg {
   display: none;
+}
+
+#imgMan {
+  background-color: rgb(0, 110, 255);
+  padding: 10px;
+}
+
+#imgWoman {
+  background-color: rgb(183, 0, 255);
+  padding: 10px;
 }
 
 .genderMan:checked ~ img#imgMan {
